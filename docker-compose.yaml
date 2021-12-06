@@ -1,0 +1,35 @@
+version: '3.7'
+
+# Run as `docker-compose build; docker-compose up -d`
+# Check with `docker ps`
+# Then check the logs with `docker logs --tail 50 $container_id`
+# Shut down containers with `docker-compose down`
+
+services:
+
+  postgres:
+    container_name: luisa-captcha-postgres
+    image: postgres:14.1-alpine
+    restart: 'always'
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - './data:/var/lib/postgresql/data/'
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+
+  backend:
+    container_name: luisa-captcha-api
+    environment:
+      DATABASE_URI: "postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@luisa-captcha-postgres:5432/$POSTGRES_DB"
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - 5000:5000
