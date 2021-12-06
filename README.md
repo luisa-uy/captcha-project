@@ -9,9 +9,10 @@ For this to work, you must create a `.env` file with the following iniformation:
 POSTGRES_USER=$user
 POSTGRES_PASSWORD=$password
 POSTGRES_DB=$database_name
+API_PATH=$api_path
 ```
 
-A Postgres 🐘 database will be created with those credentials, and the `backend` project will be initialized connected to that database.
+A Postgres 🐘 database will be created with those credentials, and the `backend` project will be initialized from the provided `$API_PATH`, connected to that database.
 
 ## Usage
 
