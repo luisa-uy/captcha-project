@@ -12,7 +12,7 @@ POSTGRES_DB=$database_name
 API_PATH=$api_path
 ```
 
-A Postgres 🐘 database will be created with those credentials, and the `backend` project will be initialized from the provided `$API_PATH`, connected to that database.
+A Postgres 🐘 database will be created with those credentials, and the [captcha-api](https://github.com/luisa-uy/captcha-api) project will be initialized from the provided `$API_PATH`, connected to that database.
 
 ## Usage
 
@@ -25,7 +25,7 @@ Check the running containers with `docker ps`, or get inside a container with
 ```
 docker exec -it $container $command
 
-docker exec -it *luisa-captcha-api* bash # API
+docker exec -it luisa-captcha-api bash # API
 docker exec -it luisa-captcha-postgres psql -U$POSTGRES_USER -d$POSTGRES_DATABASE # pg database
 ```
 
