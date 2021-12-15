@@ -2,8 +2,8 @@
 
 message () {
   # First param sets the color and must be an integer
-  printf '[%s] \e[3%sm%s\e[0m\n' "$0" "$@"
-  [ "$1" == "1" ] && exit 1 || return 0
+  printf '[%s] \e[3%sm%s\e[0m\n' "$(basename $0)" "$@"
+  [ $1 -eq 1 ] && exit 1 || return 0
 }
 
 api_path="backend"
