@@ -63,7 +63,7 @@ bloque_por_conocer () {
 }
 
 folder=$1
-id=1719
+id=1
 
 filelist=$(ls $folder  | grep -v txt$ |  sed -e 's/.png$//g')
 
