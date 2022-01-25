@@ -6,6 +6,26 @@ message () {
 	[ $1 -eq 1 ] && exit 1 || return 0
 }
 
+reset_db () {
+	
+	# Delete the previous `data` folder 
+	sudo rm data -rf \
+		|| ( message 1 "Could NOT delete ./data, please delete it manually and try again"  \
+		&& exit 1 ) 
+
+	# Get the .sql file
+	curl 'https://agbo.keybase.pub/luisa/dummy.sql.gpg?dl=1' --output dummy.sql.gpg
+	gpg --passphrase $(grep GPG_PASSPHRASE .env | cut -d\= -f2) -o dummy.sql --batch --decrypt dummy.sql.gpg
+
+	# Run the container and deploy the dump
+	docker compose up postgres -d
+	docker cp dummy.sql luisa-captcha-postgres:dummy.sql
+	docker exec -it luisa-captcha-postgres psql -Uadmin -dluisa -f dummy.sql
+
+	# Cleanup
+	rm dummy.sql{,.gpg}
+}
+
 api_path="backend"
 front_path="frontend"
 dummy_env=(
@@ -40,5 +60,4 @@ docker-compose build && \
 docker-compose up -d \
 	&& message 2 "docker-compose successfully ran 🐋" \
 	|| message 1 "docker-compose failed 🔥"
-
 
