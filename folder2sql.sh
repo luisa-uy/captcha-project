@@ -16,11 +16,12 @@ array2sql () {
 
 bloque_conocido () {
 	
-	bloq=('INSERT INTO bloque (id, path_imagen, texto, imagen) VALUES') 
+	bloq=('INSERT INTO bloque (id, status, path_imagen, texto, imagen) VALUES') 
 	for i in $filelist; do 
 		bloq=(${bloq[@]} \
-			"$(printf "(%s,\'%s\',\'%s\',\'data:image/png;base64,%s\')\n" \
+			"$(printf "(%s,%s,\'%s\',\'%s\',\'%s\')\n" \
 				$id \
+				"1" \
 				"$i" \
 				"$(head -1 "$folder/$i.txt")" \
 				"$(base64 -w0 "$folder/$i.png")"
@@ -34,13 +35,14 @@ bloque_conocido () {
 
 bloque_por_conocer () {
 
-	bloq=("INSERT INTO bloque (id, path_imagen, imagen) VALUES")
+	bloq=("INSERT INTO bloque (id, status, path_imagen, imagen) VALUES")
 	intento=('INSERT INTO intento (fecha_hora, texto, bloque_id) VALUES')
 
 	for i in $filelist; do 
 		bloq=(${bloq[@]} \
-			"$(printf "(%s,\'%s\',\'data:image/png;base64,%s\')\n" \
+			"$(printf "(%s,%s,\'%s\',\'%s\')\n" \
 				$id \
+				"0" \
 				"$i" \
 				"$(base64 -w0 "$folder/$i.png")" \
 			)"
@@ -67,7 +69,7 @@ id=1
 
 filelist=$(ls $folder  | grep -v txt$ |  sed -e 's/.png$//g')
 
-# bloque_por_conocer $filelist
-  bloque_conocido $filelist
+  bloque_por_conocer $filelist
+# bloque_conocido $filelist
 
 
