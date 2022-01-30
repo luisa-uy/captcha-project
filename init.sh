@@ -6,8 +6,8 @@ message () {
 	[ $1 -eq 1 ] && exit 1 || return 0
 }
 
-api_path="backend"
-front_path="frontend"
+api_path="./backend"
+front_path="./frontend"
 dummy_env=(
 	"FLASK_APP=app.py"
 	"FLASK_ENV=development"
