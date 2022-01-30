@@ -36,7 +36,9 @@ services:
     container_name: luisa-captcha-api
     environment:
       DATABASE_URI: "postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@luisa-captcha-postgres:5432/$POSTGRES_DB"
-    build: 
+    volumes:
+      - '${API_PATH}:/usr/src/app'
+    build:
       context: ${API_PATH}
       dockerfile: Dockerfile
     depends_on:
