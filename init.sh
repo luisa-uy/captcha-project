@@ -20,13 +20,15 @@ dummy_env=(
 
 # Get the frontend project
 [ -d "$front_path" ] && message 6 "🤔 $front_path directory not empty, skipping..." \
-	|| ( git clone git@github.com:luisa-uy/captcha-frontend.git $front_path \
+	|| ( ( git clone git@github.com:luisa-uy/captcha-frontend.git $front_path \
+	|| git clone https://github.com/luisa-uy/captcha-frontend.git $front_path ) \
 	&& message 2 "Frontend repository cloned!" \
 	|| message 1 "Could not clone frontend repository 👀" )
 
 # Get the backend project
 [ -d "$api_path" ] && message 6 "🤔 $api_path directory not empty, skipping..." \
-	|| ( git clone git@github.com:luisa-uy/captcha-api.git $api_path \
+	|| ( ( git clone git@github.com:luisa-uy/captcha-api.git $api_path \
+	|| git clone https://github.com/luisa-uy/captcha-api.git $api_path ) \
 	&& message 2 "Backend repository cloned!" \
 	|| message 1 "Could not clone backend repository 👀" )
 

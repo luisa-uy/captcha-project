@@ -17,6 +17,20 @@ services:
      - NGINX_HOST=localhost
      - NGINX_PORT=80
 
+  backend:
+    container_name: luisa-captcha-api
+    environment:
+      DATABASE_URI: "postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@luisa-captcha-postgres:5432/$POSTGRES_DB"
+    volumes:
+      - '${API_PATH}:/usr/src/app'
+    build:
+      context: ${API_PATH}
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - 5000:5000
+
   postgres:
     container_name: luisa-captcha-postgres
     image: postgres:14.1-alpine
@@ -32,16 +46,3 @@ services:
     expose:
       - 5432
 
-  backend:
-    container_name: luisa-captcha-api
-    environment:
-      DATABASE_URI: "postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@luisa-captcha-postgres:5432/$POSTGRES_DB"
-    volumes:
-      - '${API_PATH}:/usr/src/app'
-    build:
-      context: ${API_PATH}
-      dockerfile: Dockerfile
-    depends_on:
-      - postgres
-    ports:
-      - 5000:5000
