@@ -23,7 +23,7 @@ bloque_conocido () {
 				$id \
 				"1" \
 				"$i" \
-				"$(head -1 "$folder/$i.txt")" \
+				"$(head -1 "$folder/$i.txt" | sed "s/\\\'/\'\'/g" )" \
 				"$(base64 -w0 "$folder/$i.png")"
 			)"
 		)
@@ -47,7 +47,7 @@ bloque_por_conocer () {
 				"$(base64 -w0 "$folder/$i.png")" \
 			)"
 		)
-		for j in $(cat $folder/$i.txt); do
+		for j in $(cat $folder/$i.txt | sed "s/\\\'/\'\'/g"); do
 			intento=(${intento[@]} \
 				$(printf "(\'%s\',\'%s\',%s)" \
 					"$(date)" \
