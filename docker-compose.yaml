@@ -41,7 +41,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - './data:/var/lib/postgresql/data/'
-      - './init.sql:/docker-entrypoint-initdb.d/1.sql'
+      - './init-ddl.sql:/docker-entrypoint-initdb.d/1.sql'
+      - './init.sql:/docker-entrypoint-initdb.d/2.sql'
     ports:
       - "5432:5432"
     expose:
