@@ -11,7 +11,7 @@ CREATE TABLE bloque
 CREATE TABLE intento
 (
     id         SERIAL NOT NULL,
-    fecha_hora varchar(255),
+    fecha_hora date,
     texto      varchar(255),
     bloque_id  int,
     PRIMARY KEY (id)
