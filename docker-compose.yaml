@@ -10,12 +10,12 @@ services:
     container_name: luisa-captcha-frontend
     image: nginx:1.20-alpine
     volumes:
-     - ${FRONT_PATH}:/usr/share/nginx/html:ro
+      - ${FRONT_PATH}:/usr/share/nginx/html:ro
     ports:
-     - "8080:80"
+      - "8080:80"
     environment:
-     - NGINX_HOST=localhost
-     - NGINX_PORT=80
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
 
   backend:
     container_name: luisa-captcha-api
@@ -29,7 +29,7 @@ services:
     depends_on:
       - postgres
     ports:
-      - 5000:5000
+      - "5000:5000"
 
   postgres:
     container_name: luisa-captcha-postgres
@@ -41,8 +41,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - './data:/var/lib/postgresql/data/'
+      - './init.sql:/docker-entrypoint-initdb.d/1.sql'
     ports:
-      - 5432:5432
+      - "5432:5432"
     expose:
       - 5432
-
