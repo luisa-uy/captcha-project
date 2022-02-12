@@ -1,4 +1,8 @@
+# Archivos de proyecto temporales o configuraciones
 .env
 data
 backend
 frontend
+
+# Archivos temporales de herramientas
+.idea
