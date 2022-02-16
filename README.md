@@ -47,7 +47,7 @@ Podemos utilizar un navegador web para navegar a `localhost:8080`, esto nos va a
 
 
 ### Backend 🐍
-Como también consultar los endpoints de la API en `localhost:5000`
+Podemos consultar los endpoints de la API en `localhost:5000`
 ![baccc](img/img2.png)
 
 
@@ -66,7 +66,7 @@ docker ps
 
 Para ver los logs de un contenedor en particular (incluso uno que falló) es con
 ```
-docker logs $container_id
+docker logs $nombre_contenedor
 ```
 
 Se puede entrar a los contenedores usando
@@ -83,6 +83,12 @@ Finalmente, terminamos la ejecución con
 ```
 docker-compose down
 ```
+
+## Desarrollo
+La idea es poder continuar el desarrollo de los proyectos clonados previamente. Ambos tienen su versionado independiente a este proyecto y se mantienen por separado.  
+
+Tanto el frontend como el backend aceptan cambios "en caliente", por lo que mientras el contenedor esté en ejecución, se puede desarrollar y los cambios se van a ver impactados automáticamente en cuanto son guardados.
+
 
 ## Dependencias
 
