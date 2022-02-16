@@ -38,8 +38,7 @@ dummy_env=(
 	|| message 6 "🤔 .env file found, skipping..."
 
 # Make the first build and run `docker-compose up`
-docker-compose build && \
-docker-compose up -d \
+docker-compose up --force-recreate --build -d \
 	&& message 2 "docker-compose successfully ran 🐋" \
 	|| message 1 "docker-compose failed 🔥"
 
