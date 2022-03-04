@@ -1,4 +1,6 @@
-CREATE TABLE bloque
+CREATE SCHEMA captcha;
+
+CREATE TABLE captcha.bloque
 (
     id          SERIAL
         PRIMARY KEY,
@@ -8,7 +10,7 @@ CREATE TABLE bloque
     imagen      TEXT
 );
 
-CREATE TABLE intento
+CREATE TABLE captcha.intento
 (
     id         SERIAL
         PRIMARY KEY,
@@ -17,7 +19,7 @@ CREATE TABLE intento
     bloque_id  INTEGER
 );
 
-CREATE TABLE captcha
+CREATE TABLE captcha.captcha
 (
     id         SERIAL
         PRIMARY KEY,
@@ -26,12 +28,12 @@ CREATE TABLE captcha
     token      UUID
 );
 
-CREATE TABLE bloque_captcha
+CREATE TABLE captcha.bloque_captcha
 (
     id       SERIAL
         PRIMARY KEY,
     bloques  INTEGER
-        REFERENCES bloque,
+        REFERENCES captcha.bloque,
     captchas INTEGER
-        REFERENCES captcha
+        REFERENCES captcha.captcha
 );
