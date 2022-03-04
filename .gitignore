@@ -6,3 +6,4 @@ frontend
 
 # Archivos temporales de herramientas
 .idea
+*.iml
