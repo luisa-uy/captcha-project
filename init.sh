@@ -24,23 +24,13 @@ dummy_env=(
 # Load the environment file
 source .env
 
-# Get the frontend project
-[ -d "$FRONT_PATH" ] && message 6 "🤔 $FRONT_PATH directory not empty, skipping..." \
-	|| ( ( git clone git@github.com:luisa-uy/captcha-frontend.git $FRONT_PATH \
-	|| git clone https://github.com/luisa-uy/captcha-frontend.git $FRONT_PATH ) \
-	&& message 2 "Frontend repository cloned!" \
-	|| message 1 "Could not clone frontend repository 👀" )
-
-# Get the backend project
-[ -d "$API_PATH" ] && message 6 "🤔 $API_PATH directory not empty, skipping..." \
-	|| ( ( git clone git@github.com:luisa-uy/captcha-api.git $API_PATH \
-	|| git clone https://github.com/luisa-uy/captcha-api.git $API_PATH ) \
-	&& message 2 "Backend repository cloned!" \
-	|| message 1 "Could not clone backend repository 👀" )
+# Get submodules 
+git submodule update --init --recursive \
+	&& message 2 "Modules initialized!" \
+	|| message 1 "Could not initialize modules 👀"
 
 # Make the first build and run `docker-compose up`
 docker-compose up --force-recreate --build -d \
 	&& message 2 "docker-compose successfully ran 🐋" \
 	|| message 1 "docker-compose failed 🔥"
-
 
