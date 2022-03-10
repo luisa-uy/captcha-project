@@ -26,7 +26,7 @@ source .env
 
 # Get submodules 
 git submodule update --init --recursive \
-	&& message 2 "Modules initialized!" \
+	&& message 2 "Modules initialized! 🐙" \
 	|| message 1 "Could not initialize modules 👀"
 
 # Make the first build and run `docker-compose up`
