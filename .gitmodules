@@ -1,6 +1,8 @@
 [submodule "backend"]
 	path = backend
 	url = ../captcha-backend.git
+	branch = master
 [submodule "frontend"]
 	path = frontend
 	url = ../captcha-frontend.git
+	branch = master
