@@ -21,6 +21,7 @@ services:
     container_name: luisa-captcha-api
     environment:
       DATABASE_URI: "postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@luisa-captcha-postgres:5432/$POSTGRES_DB"
+      HOST_IP: "0.0.0.0"
     volumes:
       - '${API_PATH}:/usr/src/app'
     build:
